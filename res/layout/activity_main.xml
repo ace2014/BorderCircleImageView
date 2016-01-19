@@ -1,0 +1,61 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res/com.pzl.bordercircleimageview"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/b2"
+    android:orientation="vertical"
+    tools:context="com.pzl.bordercircleimageview.MainActivity" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <com.pzl.bordercircleimageview.BorderCircleImageView
+            android:id="@+id/bciv"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:border_alpha="100"
+            app:border_color="#a0a0a0"
+            app:border_width="8dp"
+            app:image_res="@drawable/a15" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/holo_blue_light"
+            android:gravity="center"
+            android:padding="30dp"
+            android:text="Hello"
+            android:textColor="#ffffff" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_green_light"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="Hello"
+        android:textColor="#ffffff" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/tv_loadNetImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_orange_light"
+            android:clickable="true"
+            android:gravity="center"
+            android:onClick="click"
+            android:padding="20dp"
+            android:text="设置网络图片" />
+    </LinearLayout>
+
+</LinearLayout>
