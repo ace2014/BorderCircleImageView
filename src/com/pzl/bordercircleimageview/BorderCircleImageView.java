@@ -58,11 +58,13 @@ public class BorderCircleImageView extends View
     public BorderCircleImageView(Context context, AttributeSet attrs)
     {
         this(context, attrs, 0);
+        Log.i(TAG, "2参构造");
     }
     
     public BorderCircleImageView(Context context, AttributeSet attrs, int defStyle)
     {
         super(context, attrs, defStyle);
+        Log.i(TAG, "3参构造");
         
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.BorderCircleImageView);
         
@@ -85,6 +87,9 @@ public class BorderCircleImageView extends View
     protected void onDraw(Canvas canvas)
     {
         super.onDraw(canvas);
+        Log.i(TAG, "onDraw");
+        scaledBitmap = calcScaleBitmap(mOriginalBitmap, mMinValueOfWidthHeight - mBorderWidth);
+        mCircleBitmap = tailorCircleBitmap(scaledBitmap);
         canvas.drawCircle(mCxBorder, mCyBorder, mRadiusBorder, mPaintBorder);
         canvas.drawBitmap(mCircleBitmap, mBorderWidth / 2, mBorderWidth / 2, null);
         recycleBitmap();
@@ -107,8 +112,6 @@ public class BorderCircleImageView extends View
             mCyBorder = mMinValueOfWidthHeight / 2;
         }
         mRadiusBorder = mMinValueOfWidthHeight / 2;
-        scaledBitmap = calcScaleBitmap(mOriginalBitmap, mMinValueOfWidthHeight - mBorderWidth);
-        mCircleBitmap = tailorCircleBitmap(scaledBitmap);
     }
     
     private int calcWidth(int widthMeasureSpec)
@@ -210,8 +213,12 @@ public class BorderCircleImageView extends View
      */
     public void setBitmap(Bitmap bitmap)
     {
-        scaledBitmap = calcScaleBitmap(bitmap, mMinValueOfWidthHeight - mBorderWidth);
-        mCircleBitmap = tailorCircleBitmap(scaledBitmap);
+        if (mOriginalBitmap != null && !mOriginalBitmap.isRecycled())
+        {
+            mOriginalBitmap.recycle();
+            Log.i(TAG, "recycle:mOriginalBitmap");
+        }
+        mOriginalBitmap = bitmap;
         invalidate();
     }
     
@@ -220,11 +227,6 @@ public class BorderCircleImageView extends View
      */
     private void recycleBitmap()
     {
-        if (mOriginalBitmap != null && !mOriginalBitmap.isRecycled())
-        {
-            mOriginalBitmap.recycle();
-            Log.i(TAG, "recycle:mOriginalBitmap");
-        }
         if (mCircleBitmap != null && !mCircleBitmap.isRecycled())
         {
             mCircleBitmap.recycle();
